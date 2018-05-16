@@ -1,12 +1,11 @@
-import ReactDOM from 'react-dom';
-import React, { Component } from 'react'
-
+// import React, { Component } from 'react'
 
 const Characters = () => {
   return fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
     .then(res => res.json())
     .then(resJson => {
-      return resJson.name
+      console.log(resJson)
+      return resJson
     })
     .catch((error) => {
       console.error(error);
@@ -14,5 +13,6 @@ const Characters = () => {
 }
 
 const NameCharacter = characters => <div>
-    <p>{character.name}</p>
+    <p>{characters.name}</p>
   </div>
+
