@@ -2,7 +2,7 @@ import React from 'react'
 import cockpitImg from '../cockpit.jpg'
 import StartBtn  from './cockpitBtn.js'
 import '../index.css'
-
+import ChatWindow from './ChatWindow.js'
 
 console.log(this.state)
 
@@ -16,6 +16,7 @@ const style = {
 const Cockpit =  props =>  {
   return <div className="backgroundImg" style={style}>
     <StartBtn/>
+    <ChatWindow/>
   </div>
 }
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Intro from './components/intro.js'
 import introText from './intro-text.txt'
-import Cockpit from './components/cockpit.js';
-import AskQuestion from './questions.js';
+import Cockpit from './components/cockpit.js'
 
 class App extends Component {
   state = {
@@ -56,7 +55,6 @@ class App extends Component {
     return (
       <div>
        <Cockpit/>
-       <AskQuestion characters={this.state.characters} question={this.state.questions} />     
       </div>
     );
   }
