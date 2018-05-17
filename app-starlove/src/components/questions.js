@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 
 const HandleQuestion = ({characters, question}) => {
-  const HandleAnswer = ({characters}, question) => {
-    console.log(characters, question);
-    console.log(characters.filter(c => c.species === question))
+  const HandleAnswer = (e, {characters}, question) => {
+     const filter1 = characters.filter(c => c.species === question)
   }
 
   return (
     <div>
       <p>{question.text}</p>
-      <button onClick={HandleAnswer({characters}, question.ifyes)}>{question.yes}</button>
-      <button onClick={HandleAnswer({characters}, question.ifno)}>{question.no}</button>
+      <button onClick={(e) => HandleAnswer(e, {characters}, question.ifyes)}>{question.yes}</button>
+      <button onClick={(e) => HandleAnswer(e, {characters}, question.ifno)}>{question.no}</button>
     </div>
   )
 }
