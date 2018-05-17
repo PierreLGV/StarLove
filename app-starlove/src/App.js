@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Intro from './components/intro.js'
 import introText from './intro-text.txt'
 import Cockpit from './components/cockpit.js';
-import AskQuestion from './components/questions.js';
+import HandleQuestion from './components/questions.js';
+
 
 class App extends Component {
   state = {
@@ -14,8 +15,8 @@ class App extends Component {
         text: `T'aimes les poils ?`,
         yes: `yeahh`,
         no:`beurk`,
-        ifyes: ['Wookkie', 'Ewoks'],
-        ifno: '[jedi]'
+        ifyes: 'human',
+        ifno: 'droid'
       },
       {
         text: `T'es un petit vilain ?`,
@@ -48,6 +49,8 @@ class App extends Component {
         console.error(error);
       })
   }
+  
+
 
   render() {
     console.log(this.state.characters)
@@ -56,7 +59,7 @@ class App extends Component {
     return (
       <div>
       <Cockpit/>
-      <AskQuestion characters={this.state.characters} question={this.state.questions[0]} />     
+      <HandleQuestion characters={this.state.characters} question={this.state.questions[0]} />     
       </div>
     );
   }
