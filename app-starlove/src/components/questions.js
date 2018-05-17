@@ -1,17 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-const HandleQuestion = ({characters, question}) => {
-  const HandleAnswer = (e, {characters}, question) => {
-     const filter1 = characters.filter(c => c.species === question)
-  }
-
-  return (
+const HandleQuestion = ({ handleAnswer, ifyes, ifno, yes, no, text }) =>
     <div>
-      <p>{question.text}</p>
-      <button onClick={(e) => HandleAnswer(e, {characters}, question.ifyes)}>{question.yes}</button>
-      <button onClick={(e) => HandleAnswer(e, {characters}, question.ifno)}>{question.no}</button>
+      <p>{text}</p>
+      <button onClick={() => handleAnswer(ifyes)}>{yes}</button>
+      <button onClick={() => handleAnswer(ifno)}>{no}</button>
     </div>
-  )
-}
 
 export default HandleQuestion
