@@ -13,6 +13,7 @@ class App extends Component {
     introText: 'loading',
     isCalling: false,
     isChatting: false,
+    isDisplay: false,
     characters: [],
     currentStep: 0,
     currentList: [],
@@ -76,7 +77,12 @@ class App extends Component {
 
   handleCall = () => {
     this.setState({ isCalling: true })
+    this.setState({ isDisplay: true })
   }
+
+  // handleChat = () => {
+  //   this.setState({ isDisplay: true })
+  // }
 
   handleAnswer = filter => {
     this.setState({
@@ -115,12 +121,18 @@ class App extends Component {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     console.log(this.state.currentList)
 
+   //  const showChatte = () => {
+   //   if (this.state.isDisplay) {
+   //     return <ChatWindow/>
+   //   }
+   // }
+
     const survey = () => {
-      if (this.state.isCalling) {
+      if (this.state.isCalling && this.state.isDisplay) {
         if (this.state.currentStep < this.state.questions.length) {
             return <HandleQuestion
             handleAnswer={this.handleAnswer}
-            {...this.state.questions[this.state.currentStep]} />
+            {...this.state.questions[this.state.currentStep]}/>
           }
           this.setState({ isChatting: true })
           this.setState({ isCalling: false })
@@ -148,7 +160,7 @@ class App extends Component {
 
     return (
       <div>
-        <Cockpit handleCall={this.handleCall}/>
+        <Cockpit handleCall={this.handleCall}/> //handleChat={this.handleChat}/>
         {survey()}
         {chat()}
       </div>
