@@ -6,14 +6,14 @@ import HandleQuestion from './components/questions.js'
 import ShowBitch from './components/yourbitch.js'
 import MoneyMoneyMoney from './components/moneyMoneyMoney.js'
 import HandleChat from './components/chatbot.js'
+import ShowSpecialSelection from './components/special-selection.js'
+import ShowSelection from './components/yourselection.js'
 
 class App extends Component {
   state = {
     introIsPlaying: true,
     introText: 'loading',
-    isCalling: false,
-    isChatting: false,
-    isDisplay: false,
+    status: '',
     characters: [],
     currentStep: 0,
     currentList: [],
@@ -38,10 +38,18 @@ class App extends Component {
         text: `Tu veux du solide ?`,
         yes: `Je préfère, merci`,
         no:`J'aime les petits joueurs`,
-        ifyes: list => list.sort((a, b) => b.mass - a.mass)[0],
-        ifno: list => list.sort((a, b) => a.mass - b.mass)[0]
+        ifyes: list => list.sort((a, b) => b.mass - a.mass).slice(2),
+        ifno: list => list.sort((a, b) => a.mass - b.mass).slice(2)
       }
     ],
+    trainer: {
+      name: 'Akaboobs',
+      height: 3,
+      mass: 'A LOT',
+      gender: 'men',
+      speciality: 'regard de chaton',
+      image: ''
+    },
     credit: 0,
     chatLines: [
       {
@@ -49,46 +57,37 @@ class App extends Component {
         choiceA: 'Salut poupée',
         choiceB: 'T bonne <3',
         choiceC: '*hennissement/sueurs*',
-        ifChoiceA: 'fdf', // mv selon fonction
-        ifChoiceB: 'jkgfd', // mv selon fonction
-        ifChoiceC: 'kfo' // mv selon fonction
       },
       {
         text: 'T\'as des maxi pecs?',
         choiceA: 'Bien sûr mon loup',
         choiceB: '*RespireINTENSÉMENTdansLeCombiné*',
         choiceC: 'Non mais j\ai la mini puissance',
-        ifChoiceA: 'fdf', // mv selon fonction
-        ifChoiceB: 'jkgfd', // mv selon fonction
-        ifChoiceC: 'kfo' // mv selon fonction
       },
       {
         text: 'Je suis super X-iT... ;)',
         choiceA: 'K-non',
         choiceB: 'RhooOoooH  HH oo oO hisoflsckmsk',
         choiceC: '*flop flop flop...*... *JICLE*... "Ho non....BOWDEL" *Bruit de Chute*',
-        ifChoiceA: 'fdf', // mv selon fonction
-        ifChoiceB: 'jkgfd', // mv selon fonction
-        ifChoiceC: 'kfo' // mv selon fonction
       }
     ],
     currentLine: 0
   }
 
   handleCall = () => {
-    this.setState({ isCalling: true })
-    this.setState({ isDisplay: true })
+    this.setState({ status: 'calling'})
   }
-
-  // handleChat = () => {
-  //   this.setState({ isDisplay: true })
-  // }
 
   handleAnswer = filter => {
     this.setState({
       currentStep: this.state.currentStep + 1,
       currentList: filter(this.state.currentList)
     })
+  }
+
+  chooseBitch = () => {
+    console.log('got it');
+    this.setState({ status: 'chatting' })
   }
 
   handleClientLine = () => {
@@ -117,52 +116,46 @@ class App extends Component {
       .catch(console.error)
   }
 
+  ['']() {}
+
+  calling() {
+    if (this.state.currentStep < this.state.questions.length) {
+      return <HandleQuestion
+        handleAnswer={this.handleAnswer}
+        {...this.state.questions[this.state.currentStep]}/>
+    }
+    this.setState({ status: 'choosing' })
+  }
+
+  choosing() {
+    return <div>
+      <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList} />
+      <ShowSpecialSelection chooseBitch={this.chooseBitch} trainer={this.state.trainer} />
+    </div>
+  }
+
+  chatting() {
+    if (this.state.currentLine < this.state.chatLines.length) {
+        this.counter()
+        return <div>
+          <MoneyMoneyMoney credit={this.state.credit} />
+          <ShowBitch character={this.state.currentList} />
+          <HandleChat handleClientLine={this.handleClientLine}
+          {...this.state.chatLines[this.state.currentLine]} />
+        </div>
+      }
+      this.setState({ status: '' })
+  }
+
   render() {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     console.log(this.state.currentList)
-
-   //  const showChatte = () => {
-   //   if (this.state.isDisplay) {
-   //     return <ChatWindow/>
-   //   }
-   // }
-
-    const survey = () => {
-      if (this.state.isCalling && this.state.isDisplay) {
-        if (this.state.currentStep < this.state.questions.length) {
-            return <HandleQuestion
-            handleAnswer={this.handleAnswer}
-            {...this.state.questions[this.state.currentStep]}/>
-          }
-          this.setState({ isChatting: true })
-          this.setState({ isCalling: false })
-          return undefined
-      }
-      return undefined
-    }
-
-    const chat = () => {
-      if (this.state.isChatting) {
-        if (this.state.currentLine < this.state.chatLines.length) {
-            this.counter()
-            return <div>
-              <MoneyMoneyMoney credit={this.state.credit} />
-              <ShowBitch character={this.state.currentList} />
-              <HandleChat handleClientLine={this.handleClientLine}
-              {...this.state.chatLines[this.state.currentLine]} />
-            </div>
-          }
-          this.setState({ isChatting: false })
-          return undefined
-      }
-      return undefined
-    }
-
     return (
       <div>
-        <Cockpit handleCall={this.handleCall}/> //handleChat={this.handleChat}/>
-        {survey()}
-        {chat()}
+        <Cockpit handleCall={this.handleCall}/>
+        {typeof this[this.state.status] === 'function'
+          ? this[this.state.status]()
+          : undefined}
       </div>
     )
   }
