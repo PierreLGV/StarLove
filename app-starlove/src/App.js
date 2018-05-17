@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import Intro from './components/intro.js'
 import introText from './intro-text.txt'
-// import Cockpit from './components/cockpit.js';
+import Cockpit from './components/cockpit.js';
 import HandleQuestion from './components/questions.js';
 
 class App extends Component {
   state = {
     introIsPlaying: true,
     introText: 'loading',
+    isCalling: false,
     characters: [],
     currentStep: 0,
     currentList: [],
@@ -38,6 +39,10 @@ class App extends Component {
     ]
   }
 
+  handleCall = () => {
+    this.setState({ isCalling: true })
+  }
+
   handleAnswer = filter => {
     this.setState({
       currentStep: this.state.currentStep + 1,
@@ -65,11 +70,13 @@ class App extends Component {
   render() {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     console.log(this.state.currentList)
+    console.log(this.state.isCalling);
     return (
       <div>
-        <HandleQuestion
-          handleAnswer={this.handleAnswer}
-          {...this.state.questions[this.state.currentStep]} />
+        <Cockpit handleCall={this.handleCall}/>
+        if (this.state.isCalling) return <HandleQuestion
+              handleAnswer={this.handleAnswer}
+              {...this.state.questions[this.state.currentStep]} />
       </div>
     )
   }

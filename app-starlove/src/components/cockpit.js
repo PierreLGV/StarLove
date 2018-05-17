@@ -7,18 +7,18 @@ import '../index.css'
 console.log(this.state)
 
 const style = {
-  backgroundImage:`url(${cockpitImg})`, 
+  backgroundImage:`url(${cockpitImg})`,
   backgroundSize:'cover',
   backgroundPosition:'center',
   height: '50vw',
 }
 
-const Cockpit =  props =>  {
+const Cockpit =  ({handleCall}, props) =>  {
   return <div className="backgroundImg" style={style}>
-    <StartBtn/>
+    <StartBtn handleCall={handleCall} />
   </div>
 }
 
- 
+
 
 export default Cockpit
