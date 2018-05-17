@@ -4,7 +4,7 @@ import StartBtn  from './cockpitBtn.js'
 import '../index.css'
 
 
-
+console.log(this.state)
 
 const style = {
   backgroundImage:`url(${cockpitImg})`, 
