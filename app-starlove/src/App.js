@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Intro from './components/intro.js'
 import introText from './intro-text.txt'
 import Cockpit from './components/cockpit.js';
-import AskQuestion from './questions.js';
+import AskQuestion from './components/questions.js';
 
 class App extends Component {
   state = {
@@ -14,8 +14,8 @@ class App extends Component {
         text: `T'aimes les poils ?`,
         yes: `yeahh`,
         no:`beurk`,
-        ifyes: ['zokkie', 'mabite'],
-        ifno: '[ehwuhriuwehr]'
+        ifyes: ['Wookkie', 'Ewoks'],
+        ifno: '[jedi]'
       },
       {
         text: `T'es un petit vilain ?`,
@@ -29,6 +29,7 @@ class App extends Component {
       }
     ]
   }
+
   constructor() {
     super()
     fetch(introText)
@@ -38,7 +39,6 @@ class App extends Component {
     setTimeout(() => this.setState({ introIsPlaying: false }), 2000)
 
     /// fetch char
-
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
       .then(res => res.json())
       .then(resJson => {
@@ -55,8 +55,8 @@ class App extends Component {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     return (
       <div>
-       <Cockpit/>
-       <AskQuestion characters={this.state.characters} question={this.state.questions} />     
+      <Cockpit/>
+      <AskQuestion characters={this.state.characters} question={this.state.questions[0]} />     
       </div>
     );
   }

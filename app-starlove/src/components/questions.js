@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 
-const HandleAnswer = ({characters, question}) => 
+const HandleAnswer = ({characters, question}) => console.log('LOLILOLOLOOOOOL')
 
-const AskQuestion = ({characters, question}) => <div>
+  const AskQuestion = ({characters, question}) => { 
+console.log(question)
+return (<div>
   <p>{question.text}</p>
-  <button onClick={HandleAnswer(characters, question.ifyes)}>{question.yes}</button> onclik return ifyes
-  <button onClick={HandleAnswer(characters, question.ifno)}>{question.no}</button>  ifno
+  <button onClick={HandleAnswer(characters, question.ifyes)}>{question.yes}</button>
+  <button onClick={HandleAnswer(characters, question.ifno)}>{question.no}</button>
 </div>
-
+)
+}
 
 
 
