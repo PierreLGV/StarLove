@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import Intro from './components/intro.js'
 import introText from './intro-text.txt'
-import Cockpit from './components/cockpit.js';
-import HandleQuestion from './components/questions.js';
+import Cockpit from './components/cockpit.js'
+import HandleQuestion from './components/questions.js'
+import ShowBitch from './components/yourbitch.js'
+import MoneyMoneyMoney from './components/moneyMoneyMoney.js'
+import HandleChat from './components/chatbot.js'
 
 class App extends Component {
   state = {
@@ -37,7 +40,38 @@ class App extends Component {
         ifyes: list => list.sort((a, b) => b.mass - a.mass)[0],
         ifno: list => list.sort((a, b) => a.mass - b.mass)[0]
       }
-    ]
+    ],
+    credit: 0,
+    chatLines: [
+      {
+        text: 'Coucou mon mignon',
+        choiceA: 'Salut poupée',
+        choiceB: 'T bonne <3',
+        choiceC: '*hennissement/sueurs*',
+        ifChoiceA: 'fdf', // mv selon fonction
+        ifChoiceB: 'jkgfd', // mv selon fonction
+        ifChoiceC: 'kfo' // mv selon fonction
+      },
+      {
+        text: 'T\'as des maxi pecs?',
+        choiceA: 'Bien sûr mon loup',
+        choiceB: '*RespireINTENSÉMENTdansLeCombiné*',
+        choiceC: 'Non mais j\ai la mini puissance',
+        ifChoiceA: 'fdf', // mv selon fonction
+        ifChoiceB: 'jkgfd', // mv selon fonction
+        ifChoiceC: 'kfo' // mv selon fonction
+      },
+      {
+        text: 'Je suis super X-iT... ;)',
+        choiceA: 'K-non',
+        choiceB: 'RhooOoooH  HH oo oO hisoflsckmsk',
+        choiceC: '*flop flop flop...*... *JICLE*... "Ho non....BOWDEL" *Bruit de Chute*',
+        ifChoiceA: 'fdf', // mv selon fonction
+        ifChoiceB: 'jkgfd', // mv selon fonction
+        ifChoiceC: 'kfo' // mv selon fonction
+      }
+    ],
+    currentLine: 0
   }
 
   handleCall = () => {
@@ -50,6 +84,15 @@ class App extends Component {
       currentList: filter(this.state.currentList)
     })
   }
+
+  handleClientLine = () => {
+    this.setState({
+      currentLine: this.state.currentLine + 1,
+    })
+  }
+
+  addCredit = () => this.setState({credit: this.state.credit += 1})
+  counter = () => setInterval(this.addCredit, 1000)
 
   constructor() {
     super()
@@ -71,7 +114,6 @@ class App extends Component {
   render() {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     console.log(this.state.currentList)
-    console.log(this.state.isChatting);
 
     const survey = () => {
       if (this.state.isCalling) {
@@ -87,11 +129,28 @@ class App extends Component {
       return undefined
     }
 
+    const chat = () => {
+      if (this.state.isChatting) {
+        if (this.state.currentLine < this.state.chatLines.length) {
+            this.counter()
+            return <div>
+              <MoneyMoneyMoney credit={this.state.credit} />
+              <ShowBitch character={this.state.currentList} />
+              <HandleChat handleClientLine={this.handleClientLine}
+              {...this.state.chatLines[this.state.currentLine]} />
+            </div>
+          }
+          this.setState({ isChatting: false })
+          return undefined
+      }
+      return undefined
+    }
+
     return (
       <div>
         <Cockpit handleCall={this.handleCall}/>
         {survey()}
-
+        {chat()}
       </div>
     )
   }
