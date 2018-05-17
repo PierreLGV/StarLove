@@ -70,13 +70,17 @@ class App extends Component {
   render() {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     console.log(this.state.currentList)
-    console.log(this.state.isCalling);
+    console.log(this.state.isCalling)
+    const content = this.state.isCalling
+      ? <HandleQuestion
+          handleAnswer={this.handleAnswer}
+          {...this.state.questions[this.state.currentStep]} />
+      : undefined
+
     return (
       <div>
         <Cockpit handleCall={this.handleCall}/>
-        if (this.state.isCalling) return <HandleQuestion
-              handleAnswer={this.handleAnswer}
-              {...this.state.questions[this.state.currentStep]} />
+        {content}
       </div>
     )
   }
