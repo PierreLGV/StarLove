@@ -2,7 +2,7 @@ import React from 'react'
 import cockpitImg from '../cockpit.jpg'
 import StartBtn  from './cockpitBtn.js'
 import '../index.css'
-import ChatWindow from './ChatWindow.js'
+import WindowChat from './ChatWindow.js'
 
 console.log(this.state)
 
@@ -13,13 +13,14 @@ const style = {
   height: '50vw',
 }
 
-const Cockpit =  props =>  {
-  return <div className="backgroundImg" style={style}>
-    <StartBtn/>
-    <ChatWindow/>
-  </div>
-}
-
+class Cockpit extends React.Component {
+	render() {
+		return <div className="backgroundImg" style={style}>
+    	<StartBtn/>
+    	<WindowChat/>
+  	</div>
+	};
+} 
  
 
 export default Cockpit

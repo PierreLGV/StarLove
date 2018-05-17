@@ -1,8 +1,9 @@
 .window {
   height: '50vw';
   border-radius: 7px; 
-  position: relative;
+  position: absolute;
   top: 5%;
   right: 10%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+  width: 500px;
 }
