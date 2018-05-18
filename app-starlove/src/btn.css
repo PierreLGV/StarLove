@@ -1,7 +1,8 @@
 .startBtn {
-  width: 11vw;
-  height: auto;
-  position: relative;
-  top: 80%;
-  left: 58%;
+    width: 3.75vw;
+    height: auto;
+    position: relative;
+    top: 80%;
+    left: 57.1%;
+    margin-left: 5px;
 }

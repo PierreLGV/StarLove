@@ -8,6 +8,8 @@ import MoneyMoneyMoney from './components/moneyMoneyMoney.js'
 import HandleChat from './components/chatbot.js'
 import ShowSpecialSelection from './components/special-selection.js'
 import ShowSelection from './components/yourselection.js'
+import ChatWindow from './components/ChatWindow.js'
+import './index.css'
 
 class App extends Component {
   state = {
@@ -20,8 +22,8 @@ class App extends Component {
     questions: [
       {
         text: `T'aimes les poils ?`,
-        yes: `yeahh`,
-        no:`beurk`,
+        yes: `Je veux du velu`,
+        no:`I <3 les imberbes`,
         ifyes: list => list.filter(c => c.species !== 'droid'),
         ifno: list => list.filter(c => c.species === 'droid'
           || c.species === 'rodian'
@@ -31,7 +33,7 @@ class App extends Component {
           || c.species === 'gungan')
       },
       {
-        text: `T'es un petit vilain ?`,
+        text: `As tu été vilain ?`,
         yes: `Un chouillat...`,
         no:`Non, je suis pur`,
         ifyes: list => list.filter(c => c.affiliations.includes('Sith')
@@ -42,7 +44,7 @@ class App extends Component {
       {
         text: `Tu veux du solide ?`,
         yes: `Je préfère, merci`,
-        no:`J'aime les petits joueurs`,
+        no:`Sans façon`,
         ifyes: list => list.sort((a, b) => b.mass - a.mass).slice(2),
         ifno: list => list.sort((a, b) => a.mass - b.mass).slice(2)
       }
@@ -51,7 +53,7 @@ class App extends Component {
       {
       name: 'Akaboobs',
       height: 3,
-      mass: 'A LOT',
+      mass: 'A lot !',
       gender: 'men',
       speciality: 'regard de chaton',
       image: 'https://image.noelshack.com/fichiers/2018/20/5/1526608297-akabab.jpg'
@@ -116,7 +118,7 @@ class App extends Component {
       .then(r => r.text())
       .then(introTextValue => this.setState({ introText: introTextValue }))
 
-    setTimeout(() => this.setState({ introIsPlaying: false }), 2000)
+    setTimeout(() => this.setState({ introIsPlaying: false }), 0)
 
     /// fetch char
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
@@ -139,11 +141,10 @@ class App extends Component {
   }
 
   choosing() {
-    return <div>
-      <h2>2 matches !</h2>
+    return <div className="containerGlobal">
+        <ChatWindow/>
       <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList[0]} />
       <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList[1]} />
-      <h2>The outsider :</h2>
       <ShowSpecialSelection chooseBitch={this.chooseBitch} trainer={this.state.trainer} />
     </div>
   }
