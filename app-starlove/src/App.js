@@ -144,6 +144,12 @@ class App extends Component {
         choiceB: 'Je mange une soutane et je tutoie David Charvet.',
         choiceC: 'Je savonne un scout et je suce une famille esquimaux.',
       },
+      {
+        text:'Mon mignon... J\'ai un double appel. MONEY babe ;) <3',
+        choiceA : 'Mais... j\'me suis pas finis',
+        choiceB: 'Connasse!',
+        choiceC: 'Ok BB <3 à ce soir sur la planète zob <333'
+      }
     ],
     currentLine: 0
   }
