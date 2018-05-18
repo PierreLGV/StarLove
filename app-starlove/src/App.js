@@ -60,6 +60,7 @@ class App extends Component {
       image: 'https://image.noelshack.com/fichiers/2018/20/5/1526608297-akabab.jpg'
       },
     credit: 0,
+    callStart: 0,
     chatLines: [
       {
         text: 'Tu viens d\'où?',
@@ -148,8 +149,8 @@ class App extends Component {
   }
 
   hangUpCall = () => {
-    clearInterval(this.counter)
     this.setState({ status: '', credit: 0, currentStep: 0, currentList: this.state.characters })
+    console.log(this.state.credit)
   }
 
   handleAnswer = filter => {
@@ -161,7 +162,11 @@ class App extends Component {
 
   chooseBitch = bitch => {
     console.log('got it');
-    this.setState({ status: 'chatting', currentList: bitch })
+    this.setState({
+      status: 'chatting',
+      currentList: bitch,
+      callStart: Date.now()
+    })
   }
 
   handleClientLine = () => {
@@ -169,9 +174,6 @@ class App extends Component {
       currentLine: this.state.currentLine + 1,
     })
   }
-
-  addCredit = () => this.setState({credit: this.state.credit += 1})
-  counter = () => setInterval(this.addCredit, 1000)
 
   constructor() {
     super()
@@ -212,16 +214,16 @@ class App extends Component {
 
   chatting() {
     if (this.state.currentLine < this.state.chatLines.length) {
-        this.counter()
-        return <div>
-          <MoneyMoneyMoney credit={this.state.credit} />
+      return (
+        <div>
+          <MoneyMoneyMoney callStart={this.state.callStart} />
           <ShowBitch character={this.state.currentList} />
           <HandleChat handleClientLine={this.handleClientLine}
-          {...this.state.chatLines[this.state.currentLine]} />
+            {...this.state.chatLines[this.state.currentLine]} />
         </div>
+      )
       }
-      clearInterval(this.counter)
-      this.setState({ status: '', credit: 0 })
+      this.setState({ status: '' })
   }
 
   render() {
@@ -239,9 +241,7 @@ class App extends Component {
     return (
       <div>
         <Cockpit handleCall={this.handleCall} hangUpCall={this.hangUpCall}/>
-        {typeof this[this.state.status] === 'function'
-          ? this[this.state.status]()
-          : undefined}
+        {this[this.state.status]()}
       </div>
     )
   }
