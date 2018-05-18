@@ -80,7 +80,12 @@ class App extends Component {
   }
 
   handleCall = () => {
-    this.setState({ status: 'calling'})
+    this.setState({ status: 'calling' })
+  }
+
+  hangUpCall = () => {
+    clearInterval(this.counter)
+    this.setState({ status: '', credit: 0, currentStep: 0, currentList: this.state.characters })
   }
 
   handleAnswer = filter => {
@@ -152,7 +157,8 @@ class App extends Component {
           {...this.state.chatLines[this.state.currentLine]} />
         </div>
       }
-      this.setState({ status: '' })
+      clearInterval(this.counter)
+      this.setState({ status: '', credit: 0 })
   }
 
   render() {
@@ -160,7 +166,7 @@ class App extends Component {
     console.log(this.state.currentList)
     return (
       <div>
-        <Cockpit handleCall={this.handleCall}/>
+        <Cockpit handleCall={this.handleCall} hangUpCall={this.hangUpCall}/>
         {typeof this[this.state.status] === 'function'
           ? this[this.state.status]()
           : undefined}
