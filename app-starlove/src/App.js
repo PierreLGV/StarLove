@@ -23,7 +23,12 @@ class App extends Component {
         yes: `yeahh`,
         no:`beurk`,
         ifyes: list => list.filter(c => c.species !== 'droid'),
-        ifno: list => list.filter(c => c.species === 'droid')
+        ifno: list => list.filter(c => c.species === 'droid'
+          || c.species === 'rodian'
+          || c.species === 'hutt'
+          || c.species === 'yoda\'s species'
+          || c.species === 'trandoshan'
+          || c.species === 'gungan')
       },
       {
         text: `T'es un petit vilain ?`,
@@ -85,9 +90,9 @@ class App extends Component {
     })
   }
 
-  chooseBitch = () => {
+  chooseBitch = bitch => {
     console.log('got it');
-    this.setState({ status: 'chatting' })
+    this.setState({ status: 'chatting', currentList: bitch })
   }
 
   handleClientLine = () => {
@@ -129,7 +134,10 @@ class App extends Component {
 
   choosing() {
     return <div>
-      <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList} />
+      <h2>2 matches !</h2>
+      <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList[0]} />
+      <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList[1]} />
+      <h2>The outsider :</h2>
       <ShowSpecialSelection chooseBitch={this.chooseBitch} trainer={this.state.trainer} />
     </div>
   }

@@ -7,8 +7,7 @@ const ShowSelection = ({ chooseBitch, character }) =>
       <p>{character.gender}</p>
       <p>{character.height}</p>
       <p>{character.mass}</p>
-      <button>See profile</button>
-      <button onClick={() => chooseBitch()}>CHOOSE</button>
+      <button onClick={() => chooseBitch(character)}>CHOOSE</button>
     </div>
 
 export default ShowSelection

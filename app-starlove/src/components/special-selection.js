@@ -8,8 +8,7 @@ const ShowSpecialSelection = ({ chooseBitch, trainer }) =>
       <p>{trainer.height}</p>
       <p>{trainer.mass}</p>
       <p>{trainer.speciality}</p>
-      <button>See profile</button>
-      <button onClick={() => chooseBitch()}>CHOOSE</button>
+      <button onClick={() => chooseBitch(trainer)}>CHOOSE</button>
     </div>
 
 export default ShowSpecialSelection
