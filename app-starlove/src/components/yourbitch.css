@@ -1,0 +1,25 @@
+.bitch  {
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  position: relative;
+  top: -77.6vw;
+  left: 5.5%;  
+  z-index: 10;
+}
+.bitch img {
+  width: 80px;
+  height: 100px;
+  border: 1px solid greenyellow;
+
+}
+
+
+
+button .chooseBtn {
+  width: 40px;
+}
+
+span {
+  color: greenyellow;
+}
