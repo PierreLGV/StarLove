@@ -14,8 +14,6 @@ const Intro = ({ text, title }) =>
   <StarWarsScroll content={
     <React.Fragment>
       <div className="title">
-        <h1>A New Hope</h1>
-        <p>Episode IV</p>
       </div>
       {text.split('\n').map(line => <p>{line}</p>)}
     </React.Fragment>

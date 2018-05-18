@@ -45,33 +45,85 @@ class App extends Component {
     credit: 0,
     chatLines: [
       {
-        text: 'Coucou mon mignon',
-        choiceA: 'Salut poupée',
-        choiceB: 'T bonne <3',
+        text: 'Tu viens d\'où?',
+        choiceA: 'La France ! Ca reste le pays des 400 fromages.',
+        choiceB: 'PAYS DE GALLE INDÉPENDAAAAAAAANT',
+        choiceC: 'Je suis formateur à la Wild...',
+      },
+      {
+        text: 'T\'es marié ?',
+        choiceA: 'Oui je suis marié j\'ai des enfants et tout ça ...',
+        choiceB: 'Non..Non..Je suis pas marié avec des enfants, je suis pas un détraqué.',
+        choiceC: 'Non, je suis fan de Jean-Luc Lahaye.',
+      },
+      {
+        text: 'Parle moi mal, ça m\'excite...!',
+        choiceA: 'Jacques a dit a dit pas de charcuterie !',
+        choiceB: 'Shut up ! Kiss my ass !',
+        choiceC: '<?php echo \'<p>Hello world</p>\'; ?>',
+      },
+      {
+        text: 'Ca te plairait de venir me rejoindre ...?',
+        choiceA: 'À l\'occasion, je vous mettrai un petit coup de polish',
+        choiceB: 'Vous avez bien une amicale des anciens nazis ?',
+        choiceC: 'Elle est où la poulette ?',
+      },
+      {
+        text: 'Quel est ton pêché mignon ?',
+        choiceA: 'J\'aime quand on m\'enduit d\'huile...',
+        choiceB: 'Je démonte une poule et j\'envoie un fax à Noël Mamère',
         choiceC: '*hennissement/sueurs*',
-        ifChoiceA: 'fdf', // mv selon fonction
-        ifChoiceB: 'jkgfd', // mv selon fonction
-        ifChoiceC: 'kfo' // mv selon fonction
+      },
+      {
+        text: 'Partage moi un petit secret ...',
+        choiceA: 'Je suis une gigantesque tarlouze',
+        choiceB: 'J\'aime me beurrer la biscotte',
+        choiceC: 'Je mets une moustache dans mon slip et je viole Cendrillon',
+      },
+      {
+        text: 'Dis moi, c\'est quoi ton p\'tit nom ?',
+        choiceA: 'Hubert bonisseur de la bath',
+        choiceB: 'Jsuis pas une poukave',
+        choiceC: 'Guy Georges',
       },
       {
         text: 'T\'as des maxi pecs?',
         choiceA: 'Bien sûr mon loup',
         choiceB: '*RespireINTENSÉMENTdansLeCombiné*',
         choiceC: 'Non mais j\ai la mini puissance',
-        ifChoiceA: 'fdf', // mv selon fonction
-        ifChoiceB: 'jkgfd', // mv selon fonction
-        ifChoiceC: 'kfo' // mv selon fonction
       },
       {
         text: 'Je suis super X-iT... ;)',
-        choiceA: 'K-non',
-        choiceB: 'RhooOoooH  HH oo oO hisoflsckmsk',
-        choiceC: '*flop flop flop...*... *JICLE*... "Ho non....BOWDEL" *Bruit de Chute*',
-        ifChoiceA: 'fdf', // mv selon fonction
-        ifChoiceB: 'jkgfd', // mv selon fonction
-        ifChoiceC: 'kfo' // mv selon fonction
-      }
+        choiceA: 'Aime-moi tendre, aime-moi vrai',
+        choiceB: 'Un engin comme vous, ça devrait être livré avec une notice !',
+        choiceC: '*flop flop flop...*',
+      },
+      {
+        text: 'Do you like to grab women by their pussies ?',
+        choiceA: 'Donald ? Is this you ???',
+        choiceB: 'Vous aimez les animaux madame ?',
+        choiceC: 'MAIS TAIIIIISEZ-VOUS',
+      },
+      {
+        text: 'T\'es bien membré mon chéri ?',
+        choiceA: 'NaN',
+        choiceB: 'Comme un wookie en rute',
+        choiceC: 'Je crache sur le lama et je viole un pompier corse',
+      },
+      {
+        text: 'Cuir ou moustache ?',
+        choiceA: 'Je caresse un pompier et je pue du pull',
+        choiceB: 'Pépito ou panini? Je prends la profiterole.',
+        choiceC: 'J\'ai des mocassins à glands',
+      },
+      {
+        text: 'Tu fais quoi ce soir... fais-moi envie',
+        choiceA: 'Je m\'introduis chez Dark Vador et je mets du munster dans son casque',
+        choiceB: 'Je mange une soutane et je tutoie David Charvet.',
+        choiceC: 'Je savonne un scout et je suce une famille esquimaux.',
+      },
     ],
+
     currentLine: 0
   }
 
@@ -106,7 +158,7 @@ class App extends Component {
       .then(r => r.text())
       .then(introTextValue => this.setState({ introText: introTextValue }))
 
-    setTimeout(() => this.setState({ introIsPlaying: false }), 2000)
+    setTimeout(() => this.setState({ introIsPlaying: false }), 20000)
 
     /// fetch char
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
