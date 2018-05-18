@@ -20,30 +20,34 @@ class App extends Component {
     characters: [],
     currentStep: 0,
     currentList: [],
+    credit: 0,
+    
     questions: [
       {
-        text: `T'aimes les poils ?`,
+        text: `T\'aimes les poils ?`,
         yes: `Je veux du velu`,
-        no:`I <3 les imberbes`,
+        no:`J\'aime les imberbes`,
         ifyes: list => list.filter(c => c.species !== 'droid'),
         ifno: list => list.filter(c => c.species === 'droid'
           || c.species === 'rodian'
           || c.species === 'hutt'
           || c.species === 'yoda\'s species'
           || c.species === 'trandoshan'
-          || c.species === 'gungan')
+          || c.species === 'gungan'
+          || c.species === 'human')
+          
       },
       {
         text: `As tu été vilain ?`,
-        yes: `Un chouillat...`,
-        no:`Non, je suis pur`,
+        yes: `Ohhh oui, punis moi !!!`,
+        no:`Que nenni.`,
         ifyes: list => list.filter(c => c.affiliations.includes('Sith')
           || c.affiliations.includes('Galactic Empire')),
         ifno: list => list.filter(c => !c.affiliations.includes('Sith')
           && !c.affiliations.includes('Galactic Empire'))
       },
       {
-        text: `Tu veux du solide ?`,
+        text: `T'aime les Maxis Pecs ?`,
         yes: `Je préfère, merci`,
         no:`Sans façon`,
         ifyes: list => list.sort((a, b) => b.mass - a.mass).slice(2),
@@ -108,7 +112,7 @@ class App extends Component {
         text: 'T\'as des maxi pecs?',
         choiceA: 'Bien sûr mon loup',
         choiceB: '*RespireINTENSÉMENTdansLeCombiné*',
-        choiceC: 'Non mais j\ai la mini puissance',
+        choiceC: 'Non mais j\'ai la mini puissance',
       },
       {
         text: 'Je suis super X-iT... ;)',
@@ -181,7 +185,7 @@ class App extends Component {
       .then(r => r.text())
       .then(introTextValue => this.setState({ introText: introTextValue }))
 
-    setTimeout(() => this.setState({ introIsPlaying: false }), 57000)
+    setTimeout(() => this.setState({ introIsPlaying: false }), 54000)
 
     /// fetch char
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
