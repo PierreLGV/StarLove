@@ -1,0 +1,13 @@
+.count {
+  width: 20%;
+  height: 50%;
+  position: relative;
+  font-size: 1.3em;
+  top: -15vw;
+  left: 55%;
+  z-index: 2; 
+}
+.count span {
+  color: greenyellow;
+  
+}

@@ -1,9 +1,9 @@
 import React from 'react'
-import creditImg from '../startbtn.png'
+import './count.css'
 
 const MoneyMoneyMoney = ({ credit }) =>
-    <div>
-      <p>Sold : {credit} <img src={creditImg} alt="credit" /></p>
+    <div className="count">
+      <p><span>Sold :</span> {credit}<span> Ȼ$</span></p>
     </div>
 
 export default MoneyMoneyMoney

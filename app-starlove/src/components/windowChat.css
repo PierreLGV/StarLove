@@ -17,13 +17,43 @@
 
 p {
   color: white;
+  position: relative;
+  left: 4.8%;
 }
+.questionAnswer p {
+  font-size: 2em;
 
+}
+.questionAnswer button {
+  font-size: 1.5em;
+  
+
+}
 button {
   border: 1px solid greenyellow;
-  background-color: RGBA(255,255,255,0);
+  background-color: rgba(255,255,255,0);
   color: greenyellow;
   margin: 0 5px;
   position: relative;
-  left: -8.8%;
+  left: -4%;
+  margin-top: 20px;
+}
+.chatBot p {
+  position: relative;
+  color: white;
+  top: -75vw;
+  left: 25%;
+  font-size: 1.5em;
+}
+.chatBot button {
+  position: relative;
+  top: -72vw;
+  left: 21.5%;
+  
+}
+.bitchBtn button {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+  width: 45%;
 }

@@ -3,17 +3,22 @@
   flex-direction: column;
   width: 80px;
   position: relative;
-  top: -77.6vw;
+  top: -45vw;
   left: 5.5%;  
   z-index: 10;
 }
 .bitch img {
-  width: 80px;
-  height: 100px;
+  width: 150px;
+  height: 200px;
   border: 1px solid greenyellow;
 
 }
 
+.bitch p {
+  font-size: 1em;
+  line-height: normal;
+  margin:0;
+}
 
 
 button .chooseBtn {
@@ -22,4 +27,9 @@ button .chooseBtn {
 
 span {
   color: greenyellow;
+}
+
+.bitchBtn {
+  display: flex;
+  flex-direction: column;
 }

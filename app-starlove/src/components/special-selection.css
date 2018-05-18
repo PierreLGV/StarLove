@@ -1,6 +1,6 @@
 .trainerImg {
-  width: 80px;
-  height: 100px;
+  width: 150px;
+  height: 200px;
   border: 1px solid greenyellow;
   
 }
@@ -10,9 +10,15 @@
   flex-direction: column;
   width: 80px;
   position: relative;
-  top: -44.5vw;
-  left: 23.8%;
+  top: -42vw;
+  left: 26%;
 
+}
+
+.trainerSelection p {
+  font-size: 1em;
+  line-height: normal;
+  margin:0;
 }
 
 button .chooseBtn {
