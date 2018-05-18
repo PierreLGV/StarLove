@@ -47,14 +47,15 @@ class App extends Component {
         ifno: list => list.sort((a, b) => a.mass - b.mass).slice(2)
       }
     ],
-    trainer: {
+    trainer:
+      {
       name: 'Akaboobs',
       height: 3,
       mass: 'A LOT',
       gender: 'men',
       speciality: 'regard de chaton',
-      image: ''
-    },
+      image: 'https://image.noelshack.com/fichiers/2018/20/5/1526608297-akabab.jpg'
+      },
     credit: 0,
     chatLines: [
       {
