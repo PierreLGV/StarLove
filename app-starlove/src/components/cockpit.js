@@ -1,10 +1,7 @@
 import React from 'react'
 import cockpitImg from '../cockpit.jpg'
-import StartBtn  from './cockpitBtn.js'
+import { StartBtn, QuitBtn }  from './cockpitBtns.js'
 import '../index.css'
-
-
-console.log(this.state)
 
 const style = {
   backgroundImage:`url(${cockpitImg})`,
@@ -13,9 +10,10 @@ const style = {
   height: '50vw',
 }
 
-const Cockpit =  ({handleCall}, props) =>  {
+const Cockpit =  ({handleCall, hangUpCall}, props) =>  {
   return <div className="backgroundImg" style={style}>
     <StartBtn handleCall={handleCall} />
+    <QuitBtn hangUpCall={hangUpCall} />
   </div>
 }
 

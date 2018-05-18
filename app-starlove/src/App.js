@@ -6,14 +6,14 @@ import HandleQuestion from './components/questions.js'
 import ShowBitch from './components/yourbitch.js'
 import MoneyMoneyMoney from './components/moneyMoneyMoney.js'
 import HandleChat from './components/chatbot.js'
+import ShowSpecialSelection from './components/special-selection.js'
+import ShowSelection from './components/yourselection.js'
 
 class App extends Component {
   state = {
     introIsPlaying: true,
     introText: 'loading',
-    isCalling: false,
-    isChatting: false,
-    isDisplay: false,
+    status: '',
     characters: [],
     currentStep: 0,
     currentList: [],
@@ -23,7 +23,12 @@ class App extends Component {
         yes: `SURE`,
         no:`NO WAY`,
         ifyes: list => list.filter(c => c.species !== 'droid'),
-        ifno: list => list.filter(c => c.species === 'droid')
+        ifno: list => list.filter(c => c.species === 'droid'
+          || c.species === 'rodian'
+          || c.species === 'hutt'
+          || c.species === 'yoda\'s species'
+          || c.species === 'trandoshan'
+          || c.species === 'gungan')
       },
       {
         text: `T'es un petit vilain ?`,
@@ -38,10 +43,19 @@ class App extends Component {
         text: `Tu veux du solide ?`,
         yes: `Je préfère, merci`,
         no:`J'aime les petits joueurs`,
-        ifyes: list => list.sort((a, b) => b.mass - a.mass)[0],
-        ifno: list => list.sort((a, b) => a.mass - b.mass)[0]
+        ifyes: list => list.sort((a, b) => b.mass - a.mass).slice(2),
+        ifno: list => list.sort((a, b) => a.mass - b.mass).slice(2)
       }
     ],
+    trainer:
+      {
+      name: 'Akaboobs',
+      height: 3,
+      mass: 'A LOT',
+      gender: 'men',
+      speciality: 'regard de chaton',
+      image: 'https://image.noelshack.com/fichiers/2018/20/5/1526608297-akabab.jpg'
+      },
     credit: 0,
     chatLines: [
       {
@@ -123,24 +137,28 @@ class App extends Component {
         choiceC: 'Je savonne un scout et je suce une famille esquimaux.',
       },
     ],
-
     currentLine: 0
   }
 
   handleCall = () => {
-    this.setState({ isCalling: true })
-    this.setState({ isDisplay: true })
+    this.setState({ status: 'calling' })
   }
 
-  // handleChat = () => {
-  //   this.setState({ isDisplay: true })
-  // }
+  hangUpCall = () => {
+    clearInterval(this.counter)
+    this.setState({ status: '', credit: 0, currentStep: 0, currentList: this.state.characters })
+  }
 
   handleAnswer = filter => {
     this.setState({
       currentStep: this.state.currentStep + 1,
       currentList: filter(this.state.currentList)
     })
+  }
+
+  chooseBitch = bitch => {
+    console.log('got it');
+    this.setState({ status: 'chatting', currentList: bitch })
   }
 
   handleClientLine = () => {
@@ -169,52 +187,50 @@ class App extends Component {
       .catch(console.error)
   }
 
+  ['']() {}
+
+  calling() {
+    if (this.state.currentStep < this.state.questions.length) {
+      return <HandleQuestion
+        handleAnswer={this.handleAnswer}
+        {...this.state.questions[this.state.currentStep]}/>
+    }
+    this.setState({ status: 'choosing' })
+  }
+
+  choosing() {
+    return <div>
+      <h2>2 matches !</h2>
+      <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList[0]} />
+      <ShowSelection chooseBitch={this.chooseBitch} character={this.state.currentList[1]} />
+      <h2>The outsider :</h2>
+      <ShowSpecialSelection chooseBitch={this.chooseBitch} trainer={this.state.trainer} />
+    </div>
+  }
+
+  chatting() {
+    if (this.state.currentLine < this.state.chatLines.length) {
+        this.counter()
+        return <div>
+          <MoneyMoneyMoney credit={this.state.credit} />
+          <ShowBitch character={this.state.currentList} />
+          <HandleChat handleClientLine={this.handleClientLine}
+          {...this.state.chatLines[this.state.currentLine]} />
+        </div>
+      }
+      clearInterval(this.counter)
+      this.setState({ status: '', credit: 0 })
+  }
+
   render() {
     if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
     console.log(this.state.currentList)
-
-   //  const showChatte = () => {
-   //   if (this.state.isDisplay) {
-   //     return <ChatWindow/>
-   //   }
-   // }
-
-    const survey = () => {
-      if (this.state.isCalling && this.state.isDisplay) {
-        if (this.state.currentStep < this.state.questions.length) {
-            return <HandleQuestion
-            handleAnswer={this.handleAnswer}
-            {...this.state.questions[this.state.currentStep]}/>
-          }
-          this.setState({ isChatting: true })
-          this.setState({ isCalling: false })
-          return undefined
-      }
-      return undefined
-    }
-
-    const chat = () => {
-      if (this.state.isChatting) {
-        if (this.state.currentLine < this.state.chatLines.length) {
-            this.counter()
-            return <div>
-              <MoneyMoneyMoney credit={this.state.credit} />
-              <ShowBitch character={this.state.currentList} />
-              <HandleChat handleClientLine={this.handleClientLine}
-              {...this.state.chatLines[this.state.currentLine]} />
-            </div>
-          }
-          this.setState({ isChatting: false })
-          return undefined
-      }
-      return undefined
-    }
-
     return (
       <div>
-        <Cockpit handleCall={this.handleCall}/> //handleChat={this.handleChat}/>
-        {survey()}
-        {chat()}
+        <Cockpit handleCall={this.handleCall} hangUpCall={this.hangUpCall}/>
+        {typeof this[this.state.status] === 'function'
+          ? this[this.state.status]()
+          : undefined}
       </div>
     )
   }
