@@ -1,7 +1,3 @@
-StarWhores épisode XXX
-
-Le return du Jedi
-
 Il y a bien longtemps, dans une galaxie lointaine, très lointaine ...
 
 C’est une époque de misère sexuelle. A bord de vaisseaux spatiaux opérant à partir d’une base inconnue, les rebelles ont remporté leur première victoire sur l’abominable Empire des chastes intergalactique.
@@ -10,6 +6,6 @@ Au cours de la bataille, les rebelles ont réussi à dérober les plans secrets 
 
 Le président du Sénat, le maléfish Gode of Maquereaux, hanté par l’idée de voir son arme divulguée, lance des milliers de messages radios sournoisement codés en PHP aux confins de l’espace ...
 
-Face à ce dangereux engrenage, alors que le Congrès de la République s’enlise dans des débats sans fin, le Chancelier Suprême charge en secret le puissant  mercenaire Darkabab de la planère Naboobs de récupérer les plans et d’endiguer la rébellion par la force.
+Le Chancelier Suprême charge  le puissant  mercenaire Darkabab de la planère Naboobs de récupérer les plans et d’endiguer la rébellion par la force.
 
-Dans la solitude du cockpit de son vaisseau spaciale, après plusieurs semaines sans contact humain, Darkabab, totalement en chien, intercèpte un message radio ...
+Dans la solitude du cockpit de son vaisseau spacial, Darkabab, totalement en chien, intercèpte un message radio ...

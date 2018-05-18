@@ -20,8 +20,8 @@ class App extends Component {
     questions: [
       {
         text: `T'aimes les poils ?`,
-        yes: `yeahh`,
-        no:`beurk`,
+        yes: `SURE`,
+        no:`NO WAY`,
         ifyes: list => list.filter(c => c.species !== 'droid'),
         ifno: list => list.filter(c => c.species === 'droid')
       },
@@ -158,7 +158,7 @@ class App extends Component {
       .then(r => r.text())
       .then(introTextValue => this.setState({ introText: introTextValue }))
 
-    setTimeout(() => this.setState({ introIsPlaying: false }), 20000)
+    setTimeout(() => this.setState({ introIsPlaying: false }), 6000)
 
     /// fetch char
     fetch('https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json')
