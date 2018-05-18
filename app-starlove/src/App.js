@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Intro from './components/intro.js'
+import Sound from 'react-sound';
 import introText from './intro-text.txt'
 import Cockpit from './components/cockpit.js'
 import HandleQuestion from './components/questions.js'
@@ -224,7 +225,16 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.introIsPlaying) return <Intro text={this.state.introText} />
+    if (this.state.introIsPlaying) return <div><Intro text={this.state.introText} />
+    <Sound
+      url="http://capucineleclerc.com/starsound/starwhore.mp3"
+      playStatus={Sound.status.PLAYING}
+      playFromPosition={300 /* in milliseconds */}
+      onLoading={this.handleSongLoading}
+      onPlaying={this.handleSongPlaying}
+      onFinishedPlaying={this.handleSongFinishedPlaying}
+    />
+    </div>
     console.log(this.state.currentList)
     return (
       <div>
